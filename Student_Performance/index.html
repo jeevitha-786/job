@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZENITH | Student Performance Prediction System</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="brand-wrapper">
+          <div class="brand-icon">🎓</div>
+          <div class="brand-info">
+            <h1>ZENITH</h1>
+            <span>ML Analytics System</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">Navigation</div>
+        <button class="nav-item active" data-tab="dashboard">
+          <span class="nav-icon">📊</span>
+          <span>Overview</span>
+        </button>
+        <button class="nav-item" data-tab="predict">
+          <span class="nav-icon">🔮</span>
+          <span>Predict Performance</span>
+        </button>
+        <button class="nav-item" data-tab="models">
+          <span class="nav-icon">📈</span>
+          <span>Model Comparison</span>
+        </button>
+        <button class="nav-item" data-tab="dataset">
+          <span class="nav-icon">📁</span>
+          <span>Dataset Explorer</span>
+        </button>
+        <button class="nav-item" data-tab="batch">
+          <span class="nav-icon">⚡</span>
+          <span>Batch Predictor</span>
+        </button>
+        <button class="nav-item" data-tab="about">
+          <span class="nav-icon">ℹ️</span>
+          <span>About Project</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="model-status-card">
+          <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span>MODEL READY</span>
+          </div>
+          <div class="model-name-label">Gradient Boosting</div>
+          <div class="model-metric-label">Validation MAE: 0.9942 | R²: 0.8473</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Application Area -->
+    <main class="app-main">
+
+      <!-- Sticky Top App Bar -->
+      <header class="top-navbar">
+        <div style="display:flex; align-items:center;">
+          <button class="mobile-toggle" id="mobileToggle" title="Toggle Navigation">☰</button>
+          <div class="nav-breadcrumbs">
+            <span class="breadcrumb-root">ZENITH</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current" id="breadcrumbCurrent">Overview</span>
+          </div>
+        </div>
+
+        <div class="navbar-actions">
+          <div class="pill-badge">
+            <span>⚡ Engine:</span>
+            <strong style="color:var(--primary);">Scikit-Learn Standard</strong>
+          </div>
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light/Dark Theme">🌙</button>
+        </div>
+      </header>
+
+      <!-- Main Page Container -->
+      <div class="page-container">
+
+        <!-- ============================================== -->
+        <!-- TAB 1: OVERVIEW / DASHBOARD                    -->
+        <!-- ============================================== -->
+        <section class="tab-pane active" id="tab-dashboard">
+          <div class="page-header">
+            <h2 class="page-title">🎓 ZENITH Project Overview</h2>
+            <p class="page-subtitle">
+              Intelligent student grade estimation system powered by gradient-boosted decision trees and predictive analytics.
+            </p>
+          </div>
+
+          <!-- Top Metric Cards -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Top Algorithm</span>
+                <span class="metric-icon-badge">🏆</span>
+              </div>
+              <div class="metric-value">Gradient Boosting</div>
+              <div class="metric-desc">
+                <span>Rank #1</span> &bull; <span>Nonlinear Ensemble</span>
+              </div>
+            </div>
+
+            <div class="metric-card accent-success">
+              <div class="metric-header">
+                <span class="metric-label">Validation MAE</span>
+                <span class="metric-icon-badge">🎯</span>
+              </div>
+              <div class="metric-value">0.9942</div>
+              <div class="metric-desc">
+                <span>&lt; 1.0 grade point</span> mean deviation
+              </div>
+            </div>
+
+            <div class="metric-card accent-info">
+              <div class="metric-header">
+                <span class="metric-label">Validation R²</span>
+                <span class="metric-icon-badge">📐</span>
+              </div>
+              <div class="metric-value">0.8473</div>
+              <div class="metric-desc">
+                <span>84.7%</span> variance explained
+              </div>
+            </div>
+
+            <div class="metric-card accent-warning">
+              <div class="metric-header">
+                <span class="metric-label">Dataset Records</span>
+                <span class="metric-icon-badge">👥</span>
+              </div>
+              <div class="metric-value">393</div>
+              <div class="metric-desc">
+                <span>318 training</span> + <span>75 holdout</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- How System Works Card -->
+          <div class="card">
+            <h3 class="card-title">⚙️ Predictive Pipeline Architecture</h3>
+            <p class="card-subtitle">
+              How ZENITH analyzes multi-dimensional student data to estimate final outcomes (G3).
+            </p>
+
+            <div class="workflow-track">
+              <div class="workflow-step">
+                <div class="step-num">1</div>
+                <div class="step-title">Student Profile</div>
+                <div class="step-desc">
+                  Collects academic history (G1, G2), study habits, absences, and socio-demographic indicators.
+                </div>
+              </div>
+
+              <div class="workflow-step">
+                <div class="step-num">2</div>
+                <div class="step-title">Feature Engineering</div>
+                <div class="step-desc">
+                  Derives <em>Academic Momentum</em> (G2 &minus; G1) and <em>Effort-to-Absence Ratio</em> dynamically.
+                </div>
+              </div>
+
+              <div class="workflow-step">
+                <div class="step-num">3</div>
+                <div class="step-title">Model Inference</div>
+                <div class="step-desc">
+                  Evaluates 60 boosted decision stumps with feature split thresholds and residual minimization.
+                </div>
+              </div>
+
+              <div class="workflow-step">
+                <div class="step-num">4</div>
+                <div class="step-title">Grade & Guidance</div>
+                <div class="step-desc">
+                  Outputs estimated G3 (0–20), risk classification, key drivers, and personalized interventions.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Navigation Callouts -->
+          <div class="card">
+            <h3 class="card-title">🚀 Quick Actions</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:0.5rem;">
+              <button class="btn-primary" data-switch-tab="predict" style="flex:unset; min-width:220px;">
+                🔮 Open Student Predictor
+              </button>
+              <button class="btn-secondary" data-switch-tab="dataset">
+                📁 Explore Student Records
+              </button>
+              <button class="btn-secondary" data-switch-tab="models">
+                📊 View Benchmark Comparison
+              </button>
+              <button class="btn-secondary" data-switch-tab="batch">
+                ⚡ Run Batch File Prediction
+              </button>
+            </div>
+          </div>
+
+          <!-- Disclaimer Alert -->
+          <div class="alert-box info">
+            <span class="alert-icon">ℹ️</span>
+            <div class="alert-content">
+              <strong>Evaluation Context:</strong> The metrics displayed reflect empirical holdout validation recorded during training. Predictions serve as decision-support indicators and should always be paired with educator judgment.
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- TAB 2: PREDICT STUDENT PERFORMANCE             -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-predict">
+          <div class="page-header">
+            <h2 class="page-title">🔮 Predict Student Performance</h2>
+            <p class="page-subtitle">
+              Input student details across academic, personal, and lifestyle dimensions to calculate estimated final score (G3).
+            </p>
+          </div>
+
+          <!-- One-Click Preset Profiles Bar -->
+          <div class="presets-bar">
+            <span class="presets-label">⚡ Load Sample Profile:</span>
+            <button type="button" class="btn-preset" data-preset="achiever">
+              🌟 High Achiever (G1:17, G2:18)
+            </button>
+            <button type="button" class="btn-preset" data-preset="improving">
+              📈 Rising Star (G1:9 &rarr; G2:14)
+            </button>
+            <button type="button" class="btn-preset" data-preset="average">
+              ⚖️ Average Student (G1:11, G2:11)
+            </button>
+            <button type="button" class="btn-preset" data-preset="atrisk">
+              ⚠️ Needs Support (G1:6, G2:6)
+            </button>
+            <button type="button" class="btn-preset" data-preset="declining">
+              📉 Declining Trend (G1:15 &rarr; G2:10)
+            </button>
+          </div>
+
+          <!-- Real-time Feature Engineering Strip -->
+          <div class="feature-live-strip">
+            <div class="live-metric-item">
+              <span class="live-metric-title">Engineered Feature 1:</span>
+              <span>Academic Momentum (G2 &minus; G1):</span>
+              <span class="live-metric-val" id="liveMomentumVal">0 pts</span>
+            </div>
+            <div class="live-metric-item">
+              <span class="live-metric-title">Engineered Feature 2:</span>
+              <span>Effort / Absence Ratio:</span>
+              <span class="live-metric-val" id="liveRatioVal">2.00</span>
+            </div>
+            <div class="live-metric-item">
+              <span class="live-metric-title">Model:</span>
+              <select id="predictorModelSelector" class="form-select" style="width:auto; padding:0.25rem 0.65rem; font-size:0.8rem;">
+                <option value="gradientBoosting">Gradient Boosting (Top Model)</option>
+                <option value="randomForest">Random Forest Regressor</option>
+                <option value="ridgeRegression">Ridge Regression</option>
+                <option value="linearRegression">Linear Regression (OLS)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Main Input Form -->
+          <form id="studentPredictForm">
+            <div class="predictor-form-grid">
+
+              <!-- Column 1: Academic Information -->
+              <div class="form-column">
+                <div class="column-header">
+                  <span>📚</span> Academic History
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-school">
+                    School
+                    <span class="badge-hint">GP / MS</span>
+                  </label>
+                  <select class="form-select" id="input-school" name="school">
+                    <option value="GP" selected>Gabriel Pereira (GP)</option>
+                    <option value="MS">Mousinho da Silveira (MS)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-age">Age (years)</label>
+                  <input type="number" class="form-control" id="input-age" name="age" min="15" max="22" value="17" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-studytime">Weekly Study Time</label>
+                  <select class="form-select" id="input-studytime" name="studytime">
+                    <option value="1">&lt; 2 hours / week</option>
+                    <option value="2" selected>2–5 hours / week</option>
+                    <option value="3">5–10 hours / week</option>
+                    <option value="4">&gt; 10 hours / week</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-G1">
+                    First-Period Grade (G1)
+                    <span class="badge-hint">0–20 scale</span>
+                  </label>
+                  <input type="number" class="form-control" id="input-G1" name="G1" min="0" max="20" value="10" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-G2">
+                    Second-Period Grade (G2)
+                    <span class="badge-hint">0–20 scale</span>
+                  </label>
+                  <input type="number" class="form-control" id="input-G2" name="G2" min="0" max="20" value="10" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-absences">School Absences (days)</label>
+                  <input type="number" class="form-control" id="input-absences" name="absences" min="0" max="100" value="0" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-failures">Previous Class Failures</label>
+                  <input type="number" class="form-control" id="input-failures" name="failures" min="0" max="4" value="0" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-traveltime">Travel Time to School</label>
+                  <select class="form-select" id="input-traveltime" name="traveltime">
+                    <option value="1" selected>&lt; 15 min</option>
+                    <option value="2">15–30 min</option>
+                    <option value="3">30–60 min</option>
+                    <option value="4">&gt; 60 min</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-schoolsup">Extra Educational Support</label>
+                  <select class="form-select" id="input-schoolsup" name="schoolsup">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Column 2: Personal & Family Information -->
+              <div class="form-column">
+                <div class="column-header">
+                  <span>🏡</span> Personal & Family
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-sex">Sex</label>
+                  <select class="form-select" id="input-sex" name="sex">
+                    <option value="F" selected>Female</option>
+                    <option value="M">Male</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-address">Home Address Type</label>
+                  <select class="form-select" id="input-address" name="address">
+                    <option value="U" selected>Urban (U)</option>
+                    <option value="R">Rural (R)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-famsize">Family Size</label>
+                  <select class="form-select" id="input-famsize" name="famsize">
+                    <option value="GT3" selected>Greater than 3 members (GT3)</option>
+                    <option value="LE3">3 or fewer members (LE3)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Pstatus">Parents' Cohabitation</label>
+                  <select class="form-select" id="input-Pstatus" name="Pstatus">
+                    <option value="T" selected>Living Together (T)</option>
+                    <option value="A">Apart / Separated (A)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Medu">Mother's Education</label>
+                  <select class="form-select" id="input-Medu" name="Medu">
+                    <option value="0">None (0)</option>
+                    <option value="1">Primary (4th grade) (1)</option>
+                    <option value="2" selected>5th to 9th grade (2)</option>
+                    <option value="3">Secondary education (3)</option>
+                    <option value="4">Higher education (4)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Fedu">Father's Education</label>
+                  <select class="form-select" id="input-Fedu" name="Fedu">
+                    <option value="0">None (0)</option>
+                    <option value="1">Primary (4th grade) (1)</option>
+                    <option value="2" selected>5th to 9th grade (2)</option>
+                    <option value="3">Secondary education (3)</option>
+                    <option value="4">Higher education (4)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Mjob">Mother's Job</label>
+                  <select class="form-select" id="input-Mjob" name="Mjob">
+                    <option value="at_home">At home</option>
+                    <option value="health">Health care</option>
+                    <option value="services">Civil / Services</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="other" selected>Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Fjob">Father's Job</label>
+                  <select class="form-select" id="input-Fjob" name="Fjob">
+                    <option value="at_home">At home</option>
+                    <option value="health">Health care</option>
+                    <option value="services">Civil / Services</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="other" selected>Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-guardian">Legal Guardian</label>
+                  <select class="form-select" id="input-guardian" name="guardian">
+                    <option value="mother" selected>Mother</option>
+                    <option value="father">Father</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-famrel">Family Relationship Quality</label>
+                  <select class="form-select" id="input-famrel" name="famrel">
+                    <option value="1">1 - Very Poor</option>
+                    <option value="2">2 - Below Average</option>
+                    <option value="3">3 - Average</option>
+                    <option value="4" selected>4 - Good</option>
+                    <option value="5">5 - Excellent</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Column 3: Lifestyle & Social -->
+              <div class="form-column">
+                <div class="column-header">
+                  <span>🎯</span> Lifestyle & Social
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-reason">Reason for Choosing School</label>
+                  <select class="form-select" id="input-reason" name="reason">
+                    <option value="home">Close to home</option>
+                    <option value="reputation">School reputation</option>
+                    <option value="course" selected>Course preference</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-freetime">Free Time After School</label>
+                  <select class="form-select" id="input-freetime" name="freetime">
+                    <option value="1">1 - Very Low</option>
+                    <option value="2">2 - Low</option>
+                    <option value="3" selected>3 - Moderate</option>
+                    <option value="4">4 - High</option>
+                    <option value="5">5 - Very High</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-goout">Going Out with Friends</label>
+                  <select class="form-select" id="input-goout" name="goout">
+                    <option value="1">1 - Very Low</option>
+                    <option value="2">2 - Low</option>
+                    <option value="3" selected>3 - Moderate</option>
+                    <option value="4">4 - High</option>
+                    <option value="5">5 - Very High</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Dalc">Workday Alcohol</label>
+                  <select class="form-select" id="input-Dalc" name="Dalc">
+                    <option value="1" selected>1 - Very Low</option>
+                    <option value="2">2 - Low</option>
+                    <option value="3">3 - Medium</option>
+                    <option value="4">4 - High</option>
+                    <option value="5">5 - Very High</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-Walc">Weekend Alcohol</label>
+                  <select class="form-select" id="input-Walc" name="Walc">
+                    <option value="1" selected>1 - Very Low</option>
+                    <option value="2">2 - Low</option>
+                    <option value="3">3 - Medium</option>
+                    <option value="4">4 - High</option>
+                    <option value="5">5 - Very High</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-health">Current Health Status</label>
+                  <select class="form-select" id="input-health" name="health">
+                    <option value="1">1 - Very Bad</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="3">3 - Normal</option>
+                    <option value="4">4 - Good</option>
+                    <option value="5" selected>5 - Excellent</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-famsup">Family Educational Support</label>
+                  <select class="form-select" id="input-famsup" name="famsup">
+                    <option value="yes" selected>Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-paid">Extra Paid Classes</label>
+                  <select class="form-select" id="input-paid" name="paid">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-activities">Extracurricular Activities</label>
+                  <select class="form-select" id="input-activities" name="activities">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-higher">Aspires to Higher Education</label>
+                  <select class="form-select" id="input-higher" name="higher">
+                    <option value="yes" selected>Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-internet">Internet Access at Home</label>
+                  <select class="form-select" id="input-internet" name="internet">
+                    <option value="yes" selected>Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-romantic">In a Romantic Relationship</label>
+                  <select class="form-select" id="input-romantic" name="romantic">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-nursery">Attended Nursery School</label>
+                  <select class="form-select" id="input-nursery" name="nursery">
+                    <option value="yes" selected>Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions-row">
+              <button type="submit" class="btn-primary" id="btnSubmitPredict">
+                <span>🔮</span>
+                <span>Calculate Predicted Final Grade (G3)</span>
+              </button>
+              <button type="button" class="btn-secondary" id="resetPredictForm">
+                <span>↺</span>
+                <span>Reset Fields</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Prediction Result Output Card -->
+          <div class="prediction-result-panel" id="predictionResultPanel">
+            <h3 class="card-title" style="margin-bottom:1.5rem;">
+              <span>🎯</span>
+              <span>Predictive Assessment Result</span>
+            </h3>
+
+            <div class="result-hero-layout">
+              <!-- Animated Gauge -->
+              <div class="gauge-wrapper">
+                <div class="circular-gauge">
+                  <svg class="gauge-svg" viewBox="0 0 200 200">
+                    <circle class="gauge-bg" cx="100" cy="100" r="90" />
+                    <circle class="gauge-meter" id="resultGaugeMeter" cx="100" cy="100" r="90" />
+                  </svg>
+                  <div class="gauge-content">
+                    <div class="gauge-score" id="resultScoreVal">10.00</div>
+                    <div class="gauge-total">out of 20.00</div>
+                    <div class="gauge-percent" id="resultPercentVal">50.0% Mastery</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Information & Category -->
+              <div class="result-details">
+                <div class="result-badge badge-primary" id="resultCategoryBadge">
+                  <span>⚖️</span>
+                  <span>Satisfactory (Passing)</span>
+                </div>
+                <div class="result-summary-text" id="resultSummaryText">
+                  The model projects steady academic progress.
+                </div>
+                <div class="model-tag" id="resultModelUsed">
+                  Predicted by Gradient Boosting
+                </div>
+              </div>
+            </div>
+
+            <!-- Factors & Recommendations Breakdown -->
+            <div class="result-breakdown-grid">
+              <div class="breakdown-box">
+                <h4><span>🔍</span> Key Contributing Factors</h4>
+                <div id="resultFactorsList">
+                  <!-- Populated dynamically -->
+                </div>
+              </div>
+
+              <div class="breakdown-box">
+                <h4><span>💡</span> Recommended Academic Interventions</h4>
+                <ul class="recommendations-list" id="resultRecommendationsList">
+                  <!-- Populated dynamically -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- TAB 3: MODEL COMPARISON                        -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-models">
+          <div class="page-header">
+            <h2 class="page-title">📊 Model Performance Comparison</h2>
+            <p class="page-subtitle">
+              Evaluation metrics across 4 machine learning regressors tested on identical held-out validation data.
+            </p>
+          </div>
+
+          <!-- Comparison Table Card -->
+          <div class="card">
+            <h3 class="card-title">🏆 Validation Benchmarks</h3>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Model Architecture</th>
+                    <th>Model Family</th>
+                    <th>Mean Absolute Error (MAE)</th>
+                    <th>Root Mean Sq. Error (RMSE)</th>
+                    <th>R² Score (Variance)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="rank-badge rank-1">1</span></td>
+                    <td><strong>Gradient Boosting</strong></td>
+                    <td>Nonlinear Tree Ensemble</td>
+                    <td><strong style="color:var(--success);">0.9942</strong></td>
+                    <td>1.6214</td>
+                    <td><strong style="color:var(--primary);">0.8473</strong></td>
+                    <td><span class="pill-badge" style="color:var(--success); border-color:var(--success-border);">🌟 Production Top Pick</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="rank-badge rank-2">2</span></td>
+                    <td><strong>Random Forest</strong></td>
+                    <td>Bagged Decision Trees</td>
+                    <td>1.0917</td>
+                    <td>1.7289</td>
+                    <td>0.8265</td>
+                    <td><span class="pill-badge">Solid Baseline</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="rank-badge rank-3">3</span></td>
+                    <td><strong>Ridge Regression</strong></td>
+                    <td>L2-Penalized Linear</td>
+                    <td>1.4987</td>
+                    <td>1.9705</td>
+                    <td>0.7750</td>
+                    <td><span class="pill-badge">Linear Baseline</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="rank-badge rank-4">4</span></td>
+                    <td><strong>Linear Regression</strong></td>
+                    <td>Ordinary Least Squares</td>
+                    <td>1.5103</td>
+                    <td>1.9810</td>
+                    <td>0.7726</td>
+                    <td><span class="pill-badge">Standard OLS</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Interactive Comparison Charts -->
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">Mean Absolute Error (MAE)</span>
+                <span class="pill-badge">Lower is Better</span>
+              </div>
+              <div class="chart-canvas-container" id="maeChartContainer">
+                <!-- SVG Chart injected via app.js -->
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">R² Score (Goodness of Fit)</span>
+                <span class="pill-badge">Higher is Better</span>
+              </div>
+              <div class="chart-canvas-container" id="r2ChartContainer">
+                <!-- SVG Chart injected via app.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Analysis Insights -->
+          <div class="card" style="margin-top:1.75rem;">
+            <h3 class="card-title">💡 Why Gradient Boosting Outperforms Linear Models</h3>
+            <div style="font-size:0.9rem; line-height:1.6; color:var(--text-secondary);">
+              <p style="margin-bottom:0.75rem;">
+                <strong>1. Non-linear Interaction Thresholds:</strong> In student performance dynamics, the penalty for excessive absences or past failures is non-linear. While a linear model applies a flat slope, decision trees split at critical tipping points (e.g., absences &gt; 12 days).
+              </p>
+              <p style="margin-bottom:0.75rem;">
+                <strong>2. Synergistic Momentum:</strong> The engineered feature <em>Academic Momentum (G2 &minus; G1)</em> combines non-linearly with G2. Students exhibiting upward trajectory despite a low G1 are effectively separated by boosted splits without suffering linear drag.
+              </p>
+              <p>
+                <strong>3. Residual Minimization:</strong> Gradient boosting builds sequential estimators that directly target the errors made by previous iterations, achieving a sub-1.0 point MAE (0.9942) on held-out validation folds.
+              </p>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- TAB 4: DATASET EXPLORER                        -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-dataset">
+          <div class="page-header">
+            <h2 class="page-title">📁 Student Dataset Explorer</h2>
+            <p class="page-subtitle">
+              Browse, search, sort, and inspect individual student observations across training and challenge holdout sets.
+            </p>
+          </div>
+
+          <!-- Explorer Top Summary Stats -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Active Records</span>
+                <span class="metric-icon-badge">📄</span>
+              </div>
+              <div class="metric-value" id="dsRowCount">318</div>
+              <div class="metric-desc">Sample student rows</div>
+            </div>
+
+            <div class="metric-card accent-info">
+              <div class="metric-header">
+                <span class="metric-label">Feature Columns</span>
+                <span class="metric-icon-badge">📐</span>
+              </div>
+              <div class="metric-value" id="dsColCount">33</div>
+              <div class="metric-desc">Academic & personal attributes</div>
+            </div>
+
+            <div class="metric-card accent-success">
+              <div class="metric-header">
+                <span class="metric-label">Missing Values</span>
+                <span class="metric-icon-badge">✓</span>
+              </div>
+              <div class="metric-value" id="dsMissingCount">0</div>
+              <div class="metric-desc">100% clean & validated</div>
+            </div>
+
+            <div class="metric-card accent-warning">
+              <div class="metric-header">
+                <span class="metric-label">Mean G3 Grade</span>
+                <span class="metric-icon-badge">🎓</span>
+              </div>
+              <div class="metric-value" id="dsAvgGrade">10.12</div>
+              <div class="metric-desc">Cohort mean out of 20</div>
+            </div>
+          </div>
+
+          <!-- Explorer Toolbar -->
+          <div class="card">
+            <div class="explorer-toolbar">
+              <div class="dataset-pills" id="datasetPillsContainer">
+                <button class="dataset-pill-btn active" data-dataset="training.csv">
+                  📘 Training Set (training.csv - 318)
+                </button>
+                <button class="dataset-pill-btn" data-dataset="surprise_challenge.csv">
+                  🎯 Holdout Challenge Set (surprise_challenge.csv - 75)
+                </button>
+              </div>
+
+              <div style="display:flex; gap:0.75rem; align-items:center;">
+                <div class="search-input-wrapper">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" class="search-input" id="datasetSearchInput" placeholder="Filter by school, age, grades..." />
+                </div>
+                <button class="btn-secondary" id="exportDatasetCsvBtn" title="Export currently viewed data to CSV">
+                  💾 Export CSV
+                </button>
+              </div>
+            </div>
+
+            <!-- Paginated Interactive Table -->
+            <div class="table-responsive" style="max-height: 520px;">
+              <table class="custom-table" id="datasetTable">
+                <thead id="datasetTableHead">
+                  <!-- Generated dynamically -->
+                </thead>
+                <tbody id="datasetTableBody">
+                  <!-- Generated dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination Bar -->
+            <div class="pagination-wrapper">
+              <div id="paginationInfo">Showing 1–15 of 318 students</div>
+              <div class="pagination-controls">
+                <button class="btn-page" id="btnPrevPage" disabled>&lsaquo;</button>
+                <button class="btn-page" id="btnNextPage">&rsaquo;</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grade Distribution Histogram -->
+          <div class="card">
+            <h3 class="card-title">📈 Final Grade (G3) Distribution Histogram</h3>
+            <p class="card-subtitle">Frequency count of students across grades 0 to 20.</p>
+            <div class="chart-canvas-container" id="g3DistChartContainer" style="height:220px;">
+              <!-- SVG histogram injected via app.js -->
+            </div>
+          </div>
+
+          <!-- Data Dictionary & Schema Card -->
+          <div class="card">
+            <h3 class="card-title">📖 Dataset Feature Schema</h3>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Feature Name</th>
+                    <th>Type</th>
+                    <th>Scale / Categories</th>
+                    <th>Domain Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>school</code></td>
+                    <td>Binary</td>
+                    <td>GP, MS</td>
+                    <td>Student's school (Gabriel Pereira or Mousinho da Silveira)</td>
+                  </tr>
+                  <tr>
+                    <td><code>G1</code></td>
+                    <td>Numeric</td>
+                    <td>0 to 20</td>
+                    <td>First period assessment score</td>
+                  </tr>
+                  <tr>
+                    <td><code>G2</code></td>
+                    <td>Numeric</td>
+                    <td>0 to 20</td>
+                    <td>Second period assessment score</td>
+                  </tr>
+                  <tr>
+                    <td><code>G3</code></td>
+                    <td>Numeric (Target)</td>
+                    <td>0 to 20</td>
+                    <td>Final period grade (target variable predicted by ZENITH)</td>
+                  </tr>
+                  <tr>
+                    <td><code>studytime</code></td>
+                    <td>Ordinal</td>
+                    <td>1 (&lt;2h) to 4 (&gt;10h)</td>
+                    <td>Weekly hours invested into academic study</td>
+                  </tr>
+                  <tr>
+                    <td><code>absences</code></td>
+                    <td>Numeric</td>
+                    <td>0 to 93</td>
+                    <td>Number of school absences</td>
+                  </tr>
+                  <tr>
+                    <td><code>failures</code></td>
+                    <td>Numeric</td>
+                    <td>0 to 4</td>
+                    <td>Number of past class failures</td>
+                  </tr>
+                  <tr>
+                    <td><code>higher</code></td>
+                    <td>Binary</td>
+                    <td>yes, no</td>
+                    <td>Student intends to pursue tertiary higher education</td>
+                  </tr>
+                  <tr>
+                    <td><code>Academic_Momentum</code></td>
+                    <td>Engineered</td>
+                    <td>G2 &minus; G1</td>
+                    <td>Trajectory change indicator between period 1 and period 2</td>
+                  </tr>
+                  <tr>
+                    <td><code>Effort_Absence_Ratio</code></td>
+                    <td>Engineered</td>
+                    <td>studytime / (absences + 1)</td>
+                    <td>Proportion of study investment relative to classroom absenteeism</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- TAB 5: BATCH PREDICTOR                         -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-batch">
+          <div class="page-header">
+            <h2 class="page-title">⚡ Batch CSV Predictor</h2>
+            <p class="page-subtitle">
+              Upload an external CSV student dataset or run predictions across the entire holdout challenge set simultaneously.
+            </p>
+          </div>
+
+          <!-- Drag and Drop CSV Zone -->
+          <div class="card">
+            <div class="dropzone-container" id="csvDropzone">
+              <div class="dropzone-icon">📁</div>
+              <div class="dropzone-text">Click or drag &amp; drop student CSV file here</div>
+              <div class="dropzone-subtext">Supports comma-separated files containing student feature columns</div>
+              <input type="file" id="csvFileInput" accept=".csv" style="display:none;" />
+            </div>
+
+            <div style="display:flex; justify-content:center; gap:1rem; align-items:center;">
+              <span style="font-size:0.85rem; color:var(--text-muted);">Or run batch prediction on preloaded datasets:</span>
+              <button class="btn-secondary" id="batchPredictTrainingBtn">
+                📘 Predict Training Set (318 rows)
+              </button>
+              <button class="btn-secondary" id="batchPredictChallengeBtn">
+                🎯 Predict Holdout Set (75 rows)
+              </button>
+            </div>
+          </div>
+
+          <!-- Batch Results Display -->
+          <div class="batch-results-panel" id="batchResultsPanel">
+            <div class="card">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <div>
+                  <h3 class="card-title" style="margin-bottom:0.25rem;">📊 Batch Inference Summary</h3>
+                  <div style="font-size:0.9rem; color:var(--text-secondary);" id="batchSummaryText">
+                    Evaluated students.
+                  </div>
+                </div>
+                <button class="btn-primary" id="exportBatchPredictionsBtn" style="flex:unset;">
+                  💾 Download Predictions CSV
+                </button>
+              </div>
+
+              <div class="table-responsive" style="max-height: 480px;">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Row</th>
+                      <th>Predicted Grade (G3)</th>
+                      <th>Mastery %</th>
+                      <th>Category</th>
+                      <th>Actual Grade</th>
+                      <th>Absolute Error</th>
+                    </tr>
+                  </thead>
+                  <tbody id="batchResultsBody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- TAB 6: ABOUT PROJECT                           -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-about">
+          <div class="page-header">
+            <h2 class="page-title">ℹ️ About ZENITH</h2>
+            <p class="page-subtitle">
+              Comprehensive information on the mission, algorithms, methodology, and technology stack powering ZENITH.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <div>
+              <div class="card">
+                <h3 class="card-title">🎯 Mission & Scope</h3>
+                <p style="font-size:0.95rem; line-height:1.6; color:var(--text-secondary); margin-bottom:1rem;">
+                  ZENITH was developed to provide educators, counselors, and academic institutions with early warning indicators and personalized diagnostic signals for secondary school student outcomes.
+                </p>
+                <p style="font-size:0.95rem; line-height:1.6; color:var(--text-secondary);">
+                  By analyzing assessment records alongside socio-demographic indicators and attendance rates, ZENITH detects negative trends before final exams occur, allowing tailored interventions (such as targeted tutoring and attendance check-ins) to be enacted when they are most effective.
+                </p>
+              </div>
+
+              <div class="card">
+                <h3 class="card-title">🔬 Machine Learning Methodology</h3>
+                <div style="font-size:0.9rem; line-height:1.6; color:var(--text-secondary);">
+                  <ul style="padding-left:1.25rem; display:flex; flex-direction:column; gap:0.6rem;">
+                    <li>
+                      <strong>Feature Engineering:</strong> We designed two domain-specific composite features: <code>Academic_Momentum</code> (&Delta; between period 1 and 2 assessments) and <code>Effort_Absence_Ratio</code>.
+                    </li>
+                    <li>
+                      <strong>Preprocessing Pipeline:</strong> Missing values are imputed with median/mode, numeric indicators normalized via StandardScaler, and categorical levels encoded through sparse-tolerant one-hot transformers.
+                    </li>
+                    <li>
+                      <strong>Iterative Residual Minimization:</strong> The Gradient Boosting algorithm minimizes squared error loss using stagewise additive regression stumps.
+                    </li>
+                    <li>
+                      <strong>Evaluation & Integrity:</strong> Zero leakage is enforced; target <code>G3</code> is strictly isolated from predictors, and 20% validation splits ensure out-of-sample generalizability.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card">
+                <h3 class="card-title">🛠️ Technology Stack</h3>
+                <div class="tech-stack-grid" style="grid-template-columns:1fr;">
+                  <div class="tech-badge">
+                    <strong>HTML5 &amp; Modern Semantic Web</strong>
+                    <span>Accessible, responsive layouts and semantic markup</span>
+                  </div>
+                  <div class="tech-badge">
+                    <strong>CSS3 Custom Properties</strong>
+                    <span>Light/dark theming, modern grid and flexbox design system</span>
+                  </div>
+                  <div class="tech-badge">
+                    <strong>Vanilla JavaScript (ES6+)</strong>
+                    <span>Native client-side inference engine with zero runtime dependencies</span>
+                  </div>
+                  <div class="tech-badge">
+                    <strong>Scikit-Learn Python Pipeline</strong>
+                    <span>Trained GradientBoostingRegressor and Ridge algorithms</span>
+                  </div>
+                  <div class="tech-badge">
+                    <strong>UCI Machine Learning Repository</strong>
+                    <span>Student Performance Dataset (Cortez &amp; Silva, 2008)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 class="card-title">⚖️ Academic Disclaimer</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">
+                  Model predictions represent statistical approximations trained on historical benchmarks. They are not a deterministic judgment of any student's potential, cognitive capability, or worth. Predictions should only be utilized to support constructive educational outcomes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- App Footer -->
+      <footer class="app-footer">
+        <div>
+          <strong>ZENITH</strong> &bull; Student Performance Prediction System
+        </div>
+        <div>
+          Pure HTML5, CSS3 &amp; JavaScript ES6+ &bull; 100% Offline Compatible &bull; Zero Errors
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Scripts: Preloaded Data, Predictor Inference, and App Controller -->
+  <script src="js/models-data.js"></script>
+  <script src="js/datasets-data.js"></script>
+  <script src="js/predictor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
