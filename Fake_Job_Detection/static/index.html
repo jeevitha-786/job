@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOBCIPHER AI – Fake Job Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════════ -->
+<div id="loginPage" class="login-page">
+
+  <!-- Left brand panel -->
+  <div class="login-left">
+    <div class="login-logo-area">
+      <div class="login-logo-box">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="12" fill="#FFD43B"/>
+          <rect x="8" y="20" width="32" height="22" rx="4" fill="#163A8A"/>
+          <path d="M17 20v-4a7 7 0 0 1 14 0v4" stroke="#163A8A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="21" y="29" width="6" height="5" rx="1.5" fill="#FFD43B"/>
+          <line x1="24" y1="29" x2="24" y2="34" stroke="#163A8A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="login-brand-name">JOBCIPHER<span class="brand-ai-text"> AI</span></div>
+        <div class="login-tagline">"Decode the Job. Detect the Fraud."</div>
+      </div>
+    </div>
+
+    <div class="login-features">
+      <div class="login-feature-item">
+        <span class="feature-check">✦</span>
+        <span>AI-Powered Fraud Detection</span>
+      </div>
+      <div class="login-feature-item">
+        <span class="feature-check">✦</span>
+        <span>NLP + Machine Learning Analysis</span>
+      </div>
+      <div class="login-feature-item">
+        <span class="feature-check">✦</span>
+        <span>Real-time Confidence Scoring</span>
+      </div>
+      <div class="login-feature-item">
+        <span class="feature-check">✦</span>
+        <span>Secure Analysis History &amp; Analytics</span>
+      </div>
+    </div>
+
+    <div class="login-tech-note">Powered by Logistic Regression + TF-IDF Vectorization</div>
+  </div>
+
+  <!-- Right login card -->
+  <div class="login-right">
+    <div class="login-card">
+      <div class="login-card-logo">
+        <div class="login-card-logo-box">
+          <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+            <rect width="48" height="48" rx="12" fill="#FFD43B"/>
+            <rect x="8" y="20" width="32" height="22" rx="4" fill="#163A8A"/>
+            <path d="M17 20v-4a7 7 0 0 1 14 0v4" stroke="#163A8A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <rect x="21" y="29" width="6" height="5" rx="1.5" fill="#FFD43B"/>
+          </svg>
+        </div>
+      </div>
+      <h2 class="login-heading">Welcome Back</h2>
+      <p class="login-subheading">Sign in to continue to JOBCIPHER AI</p>
+
+      <div id="loginError" class="login-error hidden">Please enter both username and password.</div>
+
+      <form id="loginForm" autocomplete="off">
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="loginUsername" placeholder="Enter your username" autocomplete="off" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="new-password" />
+            <button type="button" class="pw-toggle" id="pwToggle" title="Toggle password visibility">
+              <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-signin">Sign In</button>
+      </form>
+
+      <p class="demo-hint">🔑 Demo: Enter any username &amp; password to continue</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     MAIN APP (hidden until login)
+══════════════════════════════════════════════ -->
+<div id="mainApp" class="main-app hidden">
+
+  <!-- ── SIDEBAR ─────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo-box">
+        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="10" fill="#FFD43B"/>
+          <rect x="8" y="20" width="32" height="22" rx="4" fill="#163A8A"/>
+          <path d="M17 20v-4a7 7 0 0 1 14 0v4" stroke="#163A8A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="21" y="29" width="6" height="5" rx="1.5" fill="#FFD43B"/>
+        </svg>
+      </div>
+      <div>
+        <div class="sidebar-brand-name">JOBCIPHER<span class="sidebar-ai"> AI</span></div>
+        <div class="sidebar-tagline">Decode the Job. Detect the Fraud.</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-section="dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item" data-section="detect">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Detect Job
+      </a>
+      <a class="nav-item" data-section="history">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Analysis History
+      </a>
+      <a class="nav-item" data-section="analytics">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+      <a class="nav-item" data-section="about">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        About Project
+      </a>
+      <a class="nav-item" data-section="settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="logout-btn" id="logoutBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ───────────────────────── -->
+  <div class="main-content">
+
+    <!-- TOP NAVBAR -->
+    <header class="topnav">
+      <button class="sidebar-toggle" id="sidebarToggle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topnav-welcome">
+        Welcome back, <span id="welcomeUser" class="topnav-username">User</span>! 👋
+      </div>
+      <div class="topnav-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="topSearchInput" placeholder="Search analyses..." />
+      </div>
+      <div class="topnav-actions">
+        <button class="notif-btn" id="notifBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge hidden" id="notifBadge">0</span>
+        </button>
+        <div class="user-avatar" id="userAvatar">JC</div>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <main class="content-area">
+
+      <!-- ════════ SECTION: DASHBOARD ════════ -->
+      <section id="section-dashboard" class="section active">
+        <div class="section-header">
+          <h1>Welcome to <span class="text-yellow">JOBCIPHER AI</span></h1>
+          <p>Your intelligent assistant for identifying suspicious job postings.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-box blue-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number blue" id="statTotal">--</div>
+              <div class="stat-label">Total Jobs Analysed</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box yellow-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number amber" id="statFake">--</div>
+              <div class="stat-label">Potentially Fake Jobs</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box blue-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number blue" id="statReal">--</div>
+              <div class="stat-label">Predicted Real Jobs</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon-box yellow-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number amber" id="statPct">--%</div>
+              <div class="stat-label">Fake Prediction Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-lower">
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Recent Analyses
+            </div>
+            <div id="recentActivity">
+              <div class="loading-pulse">Loading recent analyses…</div>
+            </div>
+          </div>
+          <div class="card quick-analyze-card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Quick Analyze
+            </div>
+            <p class="quick-desc">Paste any job description and get an instant AI-powered fraud analysis in seconds.</p>
+            <div class="quick-badges">
+              <span class="quick-badge">🤖 ML Powered</span>
+              <span class="quick-badge">⚡ Instant Results</span>
+            </div>
+            <button class="btn-yellow" onclick="goToSection('detect')">→ Start New Analysis</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ SECTION: DETECT JOB ════════ -->
+      <section id="section-detect" class="section">
+        <div class="section-header">
+          <h1>Detect <span class="text-yellow">Job Fraud</span></h1>
+          <p>Enter job posting details below and let the AI model analyze for potential fraud.</p>
+        </div>
+
+        <div class="detect-grid">
+          <!-- Form Card -->
+          <div class="card">
+            <div class="card-title-row">
+              <div class="card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Job Analysis Form
+              </div>
+              <div class="sample-pills">
+                <span>Try sample:</span>
+                <button type="button" class="pill-btn danger-pill" onclick="loadSample('scam')">🚨 Scam</button>
+                <button type="button" class="pill-btn success-pill" onclick="loadSample('real')">💼 Real</button>
+                <button type="button" class="pill-btn neutral-pill" onclick="clearDetectForm()">🧹 Clear</button>
+              </div>
+            </div>
+
+            <form id="detectForm" novalidate>
+              <div class="form-group">
+                <label for="detJobTitle">Job Title</label>
+                <input type="text" id="detJobTitle" placeholder="e.g. Software Engineer, Data Entry Clerk…" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label for="detCompany">Company Name</label>
+                <input type="text" id="detCompany" placeholder="e.g. TechCorp Inc., ABC Solutions…" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label for="detDescription">
+                  Job Description <span class="required">*</span>
+                </label>
+                <textarea id="detDescription" rows="8" placeholder="Paste the full job posting description here. Include duties, requirements, contact instructions, payment details, etc." required></textarea>
+                <span class="char-counter" id="charCounter">0 characters</span>
+              </div>
+
+              <details class="optional-fields">
+                <summary>⊕ Additional Details <span class="optional-tag">(Optional — improves accuracy)</span></summary>
+                <div class="optional-inner">
+                  <div class="form-group">
+                    <label for="detRequirements">Requirements</label>
+                    <textarea id="detRequirements" rows="3" placeholder="Required qualifications, education, experience…"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="detBenefits">Benefits</label>
+                    <textarea id="detBenefits" rows="3" placeholder="Salary, benefits, perks, equipment…"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="detCompanyProfile">Company Profile</label>
+                    <textarea id="detCompanyProfile" rows="3" placeholder="About the company, its history, culture…"></textarea>
+                  </div>
+                </div>
+              </details>
+
+              <div id="detectFormError" class="form-error hidden">Please enter a job description before analyzing.</div>
+
+              <button type="submit" class="btn-analyze" id="analyzeBtn">
+                <span id="analyzeBtnText">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Analyze Job
+                </span>
+                <div class="btn-spinner hidden" id="analyzingSpinner"></div>
+              </button>
+            </form>
+
+            <div class="disclaimer">
+              ⚠️ AI predictions are estimates and should not be treated as definitive proof of job authenticity. Always verify independently.
+            </div>
+          </div>
+
+          <!-- Result Card -->
+          <div class="card result-panel">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              Analysis Result
+            </div>
+
+            <div class="result-empty" id="resultEmpty">
+              <div class="result-empty-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#C7D7F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="result-empty-title">Ready to Analyze</div>
+              <p>Fill in the job posting details on the left and click <strong>Analyze Job</strong> to get the AI result.</p>
+            </div>
+
+            <div class="result-content hidden" id="resultContent">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ SECTION: HISTORY ════════ -->
+      <section id="section-history" class="section">
+        <div class="section-header">
+          <h1>Analysis <span class="text-yellow">History</span></h1>
+          <p>All past job analyses stored in your local database.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-toolbar">
+            <span id="historyCount" class="history-count-text">Loading…</span>
+            <button class="btn-refresh" id="refreshHistory" onclick="loadHistory(1)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Refresh
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Job Title</th>
+                  <th>Company</th>
+                  <th>Prediction</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody">
+                <tr><td colspan="6" class="table-empty">Loading history…</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </section>
+
+      <!-- ════════ SECTION: ANALYTICS ════════ -->
+      <section id="section-analytics" class="section">
+        <div class="section-header">
+          <h1><span class="text-yellow">Analytics</span> Dashboard</h1>
+          <p>Visual insights and statistics from all job analyses performed.</p>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="card chart-card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+              Real vs Fake Predictions
+            </div>
+            <div class="chart-container donut-container">
+              <canvas id="donutChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card chart-card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Daily Analyses — Last 7 Days
+            </div>
+            <div class="chart-container">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Job Analysis Summary
+          </div>
+          <div id="summaryStats">
+            <div class="loading-pulse">Loading summary…</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ SECTION: ABOUT ════════ -->
+      <section id="section-about" class="section">
+        <div class="section-header">
+          <h1>About <span class="text-yellow">JOBCIPHER AI</span></h1>
+          <p>Learn how this system detects fraudulent job postings using AI and NLP.</p>
+        </div>
+
+        <!-- What is it -->
+        <div class="card about-card mb-20">
+          <div class="card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            What is JOBCIPHER AI?
+          </div>
+          <p class="about-text">
+            <strong>JOBCIPHER AI</strong> is an AI-powered fake job posting detection system that uses <strong>Natural Language Processing (NLP)</strong> and <strong>Machine Learning</strong> to identify potentially fraudulent job listings. It analyzes the text content of job postings — including titles, descriptions, requirements, and benefits — and classifies them as either genuine or potentially fraudulent.
+          </p>
+          <p class="about-text mt-12">
+            Designed for job seekers, researchers, and HR professionals, JOBCIPHER AI provides an instant, data-driven second opinion on any job posting — helping protect people from scams, identity theft, and financial fraud commonly disguised as legitimate job opportunities.
+          </p>
+        </div>
+
+        <!-- Why it matters -->
+        <div class="about-grid mb-20">
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Why Fake Job Detection Matters
+            </div>
+            <div class="impact-mini-cards">
+              <div class="impact-card">
+                <div class="impact-num">14M+</div>
+                <div class="impact-label">Job scam victims annually worldwide</div>
+              </div>
+              <div class="impact-card">
+                <div class="impact-num">$2B+</div>
+                <div class="impact-label">Annual losses from employment fraud</div>
+              </div>
+              <div class="impact-card">
+                <div class="impact-num">60%</div>
+                <div class="impact-label">Fake job postings go undetected</div>
+              </div>
+            </div>
+            <p class="about-text mt-12">
+              Fraudulent job postings are a growing global problem. Scammers post fake vacancies to harvest personal information, collect advance fees, or recruit unwitting money mules. Traditional detection relies solely on human judgment — which is slow, inconsistent, and error-prone. JOBCIPHER AI brings machine precision to this challenge.
+            </p>
+          </div>
+
+          <!-- How it works -->
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              How It Works
+            </div>
+            <div class="how-steps">
+              <div class="step-item">
+                <div class="step-num">1</div>
+                <div>
+                  <div class="step-title">Text Input</div>
+                  <div class="step-desc">User submits a job posting: title, description, requirements, benefits, and company profile.</div>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-num">2</div>
+                <div>
+                  <div class="step-title">NLP Preprocessing</div>
+                  <div class="step-desc">Text is cleaned — HTML stripped, lowercased, non-alphabetic characters removed, whitespace normalized.</div>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-num">3</div>
+                <div>
+                  <div class="step-title">TF-IDF Vectorization</div>
+                  <div class="step-desc">The cleaned text is converted into a 10,000-dimensional feature vector using unigrams and bigrams.</div>
+                </div>
+              </div>
+              <div class="step-item last-step">
+                <div class="step-num">4</div>
+                <div>
+                  <div class="step-title">ML Classification</div>
+                  <div class="step-desc">Logistic Regression model classifies the vector as Real or Fake, with probability confidence scores.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ML Pipeline -->
+        <div class="card mb-20">
+          <div class="card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Machine Learning Pipeline
+          </div>
+          <div class="ml-pipeline-grid">
+            <div class="ml-pipeline-box">
+              <div class="ml-box-label">TF-IDF Vectorizer</div>
+              <ul class="ml-box-list">
+                <li>Max Features: <strong>10,000</strong></li>
+                <li>N-gram Range: <strong>Unigrams + Bigrams (1,2)</strong></li>
+                <li>TF Scaling: <strong>Sublinear</strong></li>
+                <li>Stop Words: <strong>English removed</strong></li>
+                <li>Vocabulary: trained on 17,880 postings</li>
+              </ul>
+            </div>
+            <div class="ml-pipeline-box">
+              <div class="ml-box-label">Logistic Regression</div>
+              <ul class="ml-box-list">
+                <li>Class Weight: <strong>Balanced</strong> (handles imbalance)</li>
+                <li>Max Iterations: <strong>1,000</strong></li>
+                <li>Regularization: <strong>C = 1.0</strong></li>
+                <li>Test Accuracy: <strong>97.96%</strong></li>
+                <li>Random State: <strong>42</strong> (reproducible)</li>
+              </ul>
+            </div>
+            <div class="ml-pipeline-box">
+              <div class="ml-box-label">Training Dataset</div>
+              <ul class="ml-box-list">
+                <li>Source: <strong>Kaggle EMScAD Dataset</strong></li>
+                <li>Total Samples: <strong>17,880 job postings</strong></li>
+                <li>Fake Jobs: <strong>~4.84% of dataset</strong></li>
+                <li>Train/Test Split: <strong>80% / 20%</strong></li>
+                <li>Stratified split to preserve class ratio</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech stack -->
+        <div class="card">
+          <div class="card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Technology Stack
+          </div>
+          <div class="tech-grid">
+            <div class="tech-badge">
+              <div class="tech-icon">🐍</div>
+              <div class="tech-name">Python 3.12</div>
+              <div class="tech-desc">Core programming language for ML and backend</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">🧠</div>
+              <div class="tech-name">NLP</div>
+              <div class="tech-desc">Natural Language Processing for text analysis</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">📊</div>
+              <div class="tech-name">TF-IDF</div>
+              <div class="tech-desc">Term Frequency–Inverse Document Frequency vectorization</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">📈</div>
+              <div class="tech-name">Logistic Regression</div>
+              <div class="tech-desc">sklearn classifier with 97.96% accuracy</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">⚡</div>
+              <div class="tech-name">FastAPI</div>
+              <div class="tech-desc">High-performance Python REST API framework</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">🗄️</div>
+              <div class="tech-name">SQLite</div>
+              <div class="tech-desc">Local database for analysis history storage</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">🌐</div>
+              <div class="tech-name">HTML5 / CSS3</div>
+              <div class="tech-desc">Responsive SaaS-style frontend dashboard</div>
+            </div>
+            <div class="tech-badge">
+              <div class="tech-icon">✨</div>
+              <div class="tech-name">JavaScript</div>
+              <div class="tech-desc">Vanilla JS with Chart.js for visualizations</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ SECTION: SETTINGS ════════ -->
+      <section id="section-settings" class="section">
+        <div class="section-header">
+          <h1><span class="text-yellow">Settings</span></h1>
+          <p>Configure display preferences and manage your account information.</p>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Display Preferences -->
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Display Preferences
+            </div>
+            <div class="settings-toggle-row">
+              <div>
+                <div class="settings-toggle-label">Show Confidence Percentages</div>
+                <div class="settings-toggle-desc">Display fraud/legitimacy probability scores in results</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggleConfidence" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="settings-toggle-row">
+              <div>
+                <div class="settings-toggle-label">Auto-refresh History</div>
+                <div class="settings-toggle-desc">Automatically reload analysis history every 30 seconds</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggleAutoRefresh" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="settings-toggle-row last-toggle">
+              <div>
+                <div class="settings-toggle-label">Disclaimer Reminder</div>
+                <div class="settings-toggle-desc">Show AI disclaimer note below each analysis result</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggleDisclaimer" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Account Info -->
+          <div class="card">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2457D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Account Information
+            </div>
+            <div class="info-row">
+              <span class="info-label">Username</span>
+              <span class="info-val" id="settingsUsername">—</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Application Version</span>
+              <span class="info-val">JOBCIPHER AI v2.0.0</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">ML Model</span>
+              <span class="info-val">Logistic Regression + TF-IDF</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Model Accuracy</span>
+              <span class="info-val">97.96% (Test Set)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Database</span>
+              <span class="info-val">SQLite (local · jobcipher.db)</span>
+            </div>
+            <div class="info-row last-info-row">
+              <span class="info-label">Training Dataset</span>
+              <span class="info-val">17,880 Kaggle job postings</span>
+            </div>
+            <div class="settings-actions">
+              <button class="btn-export" id="exportCSV">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export History as CSV
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /content-area -->
+  </div><!-- /main-content -->
+</div><!-- /mainApp -->
+
+
+<!-- ══════════════════════════════════════════════
+     DETAIL MODAL
+══════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="detailModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Analysis Details</h3>
+      <button class="modal-close" onclick="closeModal()" title="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody">Loading…</div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay hidden" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- GSAP Animation Library -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+
+<!-- GSAP ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- Main Application JavaScript -->
+<script src="/static/app.js"></script>
+</body>
+</html>
